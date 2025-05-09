@@ -13,6 +13,14 @@ const createReducer = args => (acc, currentString, index) => {
     return { ...acc, on: { click: currentArg.click }}
   }
 
+  if(currentArg && currentArg.type === "styles") {
+    return { ...acc, style: currentArg.styles }
+  }
+
+  if(currentArg && currentArg.type === "classes") {
+    return { ...acc, classes: currentArg.classes }
+  }
+
   return {
     ...acc,
     template: acc.template + currentString + (args[index] || "")
@@ -21,15 +29,11 @@ const createReducer = args => (acc, currentString, index) => {
 
 const createElement = tagName => (strings, ...args) => {
 
-  const { template, on } = strings.reduce(createReducer(args), initialState)
+  const { template, on, style, classes } = strings.reduce(createReducer(args), initialState)
   
-  const style = {
-    color: "red"
-  }
-
   return {
     type: "element",
-    template: h(tagName, { on, style }, template)
+    template: h(tagName, { on, style, class: classes }, template)
   }
 }
 

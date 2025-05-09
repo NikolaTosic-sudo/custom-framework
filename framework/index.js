@@ -1,6 +1,7 @@
-import { init, eventListenersModule, styleModule } from 'snabbdom'
+import { init, eventListenersModule, styleModule, classModule } from 'snabbdom'
 
 const patch = init([
+  classModule,
   styleModule,
   eventListenersModule
 ])
