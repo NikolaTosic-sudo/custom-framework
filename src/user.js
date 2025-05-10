@@ -24,6 +24,10 @@ const classes = {
 
 const template = 
   ({ firstName, lastName, methods }) =>
-      div`${onClick(() => methods.changeName("Ina"))}${customStyles(styles)}${customClasses(classes)}Hello ${firstName} ${lastName}`;
+      div`${onClick(() => methods.changeName("Ina"))}
+          ${customStyles(styles)}
+          ${customClasses(classes)}
+          ${div`Test another div inside`}
+          Hello ${firstName} ${lastName}`;
 
 export const User = createComponent({ template, methods, initialState });
