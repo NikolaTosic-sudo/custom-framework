@@ -1,7 +1,8 @@
 import { createComponent } from "../framework";
-import { div } from "../framework/element";
+import { div, span, wrapper } from "../framework/element";
 import { onClick } from "../framework/event";
 import { customClasses, customStyles } from "../framework/styles";
+import './user.css'
 
 const initialState = {
   firstName: "Nikola",
@@ -19,15 +20,14 @@ const styles = {
 
 const classes = {
   testClass: true,
-  anotherClass: true,
 }
 
 const template = 
   ({ firstName, lastName, methods }) =>
-      div`${onClick(() => methods.changeName("Ina"))}
+      wrapper`${onClick(() => methods.changeName("Ina"))}
           ${customStyles(styles)}
           ${customClasses(classes)}
-          ${div`Test another div inside`}
-          Hello ${firstName} ${lastName}`;
+          ${div`${customStyles({ color: "blue" })}${firstName}`}
+          ${span`${customStyles({ backgroundColor: "yellow" })}${lastName}`}`;
 
 export const User = createComponent({ template, methods, initialState });

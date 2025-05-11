@@ -9,7 +9,8 @@ const patch = init([
 export const appStart = (selector, component) => {
 
   const app = document.querySelector(selector);
-  patch(app, component.template)
+
+  patch(app, component.template);
 };
 
 let state = {}
@@ -19,7 +20,7 @@ export const createComponent = ({
   methods = {},
   initialState = {},
 }) => {
-  
+
   state = initialState;
   let previous;
 
@@ -36,7 +37,7 @@ export const createComponent = ({
     }),
     {}
   )
-  
+
   return props => {
     previous = template({ ...props, ...state, methods: mappedMethods(props) });
     return previous
