@@ -1,4 +1,9 @@
-import { appStart } from "./framework";
-import { User } from "./src/user";
+import { component } from "./framework/component";
 
-appStart("#app", User());
+component('MyComponent', {
+  render() {
+    <template>
+      <div>Hellooo {{ name }}</div>
+    </template>
+  }
+});
