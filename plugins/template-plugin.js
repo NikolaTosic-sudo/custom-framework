@@ -32,12 +32,26 @@ module.exports = function templatePlugin() {
           // itterates over the nodes in the template
           // let's try first to make the text join together and parseDocument it
           // after that we can buildDom and send it
+          // if that doesn't work as intended I probably need to parse every element individually
+          // chain them together, buildDom and send it
 
-          const dom = parseDocument(jsxElement.children[1].children[0].value);
+          let htmlForParsing = '';
 
-          console.log(jsxElement.children[1], typeof jsxElement.children[1].children[0].value);
+          function getParsedJsxElement(nodes) {
+            nodes.map((node) => {
+              if(t.isJSXText(node)) {
+                htmlForParsing += node.value
+              } else if(t.isJSXElement(node)) {
+                getParsedJsxElement(node.children)
+              }
+            })
+          }
 
-          // console.log(dom, dom.children, 'dom');
+          getParsedJsxElement(jsxElement.children)
+
+          console.log(htmlForParsing, 'for parsing')
+
+          const dom = parseDocument(htmlForParsing);
 
           const domAst = buildDomAST(dom.children);
 
