@@ -45,9 +45,9 @@ module.exports = function templatePlugin() {
                 getParsedJsxElement(node.children)
               }
             })
-          }
+          };
 
-          getParsedJsxElement(jsxElement.children)
+          getParsedJsxElement(jsxElement.children);
 
           console.log(htmlForParsing, 'for parsing')
 
@@ -62,7 +62,6 @@ module.exports = function templatePlugin() {
   };
 };
 
-// Recursive HTML to DOM AST builder
 function buildDomAST(nodes) {
   const t = require('@babel/types');
 
@@ -106,7 +105,7 @@ function buildDomAST(nodes) {
       );
     }
 
-    return t.nullLiteral(); // fallback
+    return t.nullLiteral();
   }
 
   const roots = nodes.map(createNode);
