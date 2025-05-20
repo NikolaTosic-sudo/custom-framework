@@ -1,4 +1,3 @@
-const { parseDocument } = require('htmlparser2');
 const t = require('@babel/types');
 
 module.exports = function templatePlugin() {
@@ -29,29 +28,9 @@ module.exports = function templatePlugin() {
           const jsxElement = templateNode.expression;
 
           // recursive function
-          // itterates over the nodes in the template
-          // let's try first to make the text join together and parseDocument it
-          // after that we can buildDom and send it
-          // if that doesn't work as intended I probably need to parse every element individually
-          // chain them together, buildDom and send it
-
-          let htmlForParsing = '';
-
-          function getParsedJsxElement(nodes) {
-            nodes.map((node) => {
-              if(t.isJSXText(node)) {
-                htmlForParsing += node.value
-              } else if(t.isJSXElement(node)) {
-                getParsedJsxElement(node.children)
-              }
-            })
-          };
-
-          getParsedJsxElement(jsxElement.children);
-
-          console.log(htmlForParsing, 'for parsing')
-
-          const dom = parseDocument(htmlForParsing);
+          // is there a need for recursive function?
+          // maybe just change the buildDom function
+          // it's time to remove the htmlparser2 package
 
           const domAst = buildDomAST(dom.children);
 
